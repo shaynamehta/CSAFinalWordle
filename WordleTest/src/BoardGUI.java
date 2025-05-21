@@ -14,8 +14,8 @@ import javax.swing.Timer;
 
 
 /*
- * this is straight from the 2048 i didnt have time to 
- * clean it up or make it fit our project
+ * started slightly adjusting this to work for wordle but orientation of
+ * board is a little messed up rn
  */
 public class BoardGUI extends JPanel implements KeyListener, ActionListener{
 	private Tile[][] b;
@@ -24,22 +24,22 @@ public class BoardGUI extends JPanel implements KeyListener, ActionListener{
 	Timer t; //used for bot 
 	
 	public BoardGUI() {
-		b = new Tile[4][4];
+		b = new Tile[5][5];
 		colors = new Color[20];
 		t = new Timer(1000,this);
-		setup(new int[][]{});
+		setup(new String[][]{});
 		t.start();	//calls a method every second
 	}	
 	
-	public BoardGUI(int[][] d) {
-		b = new Tile[4][4];
+	public BoardGUI(String[][] data2) {
+		b = new Tile[5][5];
 		colors = new Color[20];
 		t = new Timer(1000,this);
-		setup(d);
+		setup(data2);
 		t.start();	//calls a method every second
 	}		
 	
-	public void setup(int[][] d) {
+	public void setup(String[][] data2) {
 		JFrame frame = new JFrame("2048");
 		frame.setSize(400, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,8 +76,7 @@ public class BoardGUI extends JPanel implements KeyListener, ActionListener{
 			}
 		}
 		data = new Board();
-		data.populate(d);
-		update();		 		
+		//update();		 		
 		frame.setVisible(true);
 
 	}
@@ -99,34 +98,15 @@ public class BoardGUI extends JPanel implements KeyListener, ActionListener{
 		System.out.println(arg0.getKeyCode());
 		
 		/* you can add tester code to invoke helper methods */
-		int[] result = data.getCol(data.getBoard(),0);
+		String[] result = new String[5];
 		System.out.println(Arrays.toString(result));
 		
 		switch(arg0.getKeyCode()) {
 			
-			//slide right
-			case 39:
-				data.right();
-				break;
-				
-			case 37: //left
-				data.left();
-				break;
-			case 38: //up
-				//what to do if keyCode is 38?
-				data.up();
-				break;
-			case 40: //down
-				data.down();
-				break;
-				
-//			case 32: 
-//				data = new Board();
-//				update(); 
+		
 		}
 		
-		data.populateOne();
-		update();
+//		update();
 		
 		
 		/** reset the game if all tiles are populated **/
