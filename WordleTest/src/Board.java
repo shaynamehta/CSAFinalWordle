@@ -23,7 +23,7 @@ public class Board {
 										//(need to check if this is the best way to do so) 
 										//since we need user input to choose theme maybe do the file reading/answer 
 										//setting in a different class?
-	}
+	}//
 
 	/*
 	 * return a String representation of the 2D array board
