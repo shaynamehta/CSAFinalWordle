@@ -62,7 +62,7 @@ public class BoardGUI extends JPanel implements KeyListener, ActionListener{
 		}
 		
 		Font bigFont = new Font("Serif", Font.BOLD, 55);
-		GridLayout g = new GridLayout(4,4);
+		GridLayout g = new GridLayout(5,4);
 		frame.setLayout(g);
 		
 		for(int i =0; i < b.length;i++) {
