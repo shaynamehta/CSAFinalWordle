@@ -12,8 +12,32 @@
  * 
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class FileRead {
 
+	public void Tester(){
 	
+	File words = new File("AnimalWords");
+	String answer = "";
+	
+	try {
+		Scanner scan = new Scanner(words);
+		
+		for (int i = 0 ; i < Math.random()*14 + 1 ; i++) {
+			
+			scan.nextLine();
+			answer = scan.nextLine();
+		}
+		
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	System.out.println(answer);
+	}
 	
 }
