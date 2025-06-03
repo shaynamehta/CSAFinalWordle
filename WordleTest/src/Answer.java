@@ -16,12 +16,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class FileRead {
+public class Answer {
 	
 	
 	//empty constructor
 	//to be used when user does not choose a specific category for the round
-	public FileRead() {
+	public Answer() {
 		
 		
 	}
@@ -31,7 +31,8 @@ public class FileRead {
 	private String[] answer = new String[5];
 	private String correct = "";
 	
-	public FileRead(String category) {
+	
+	public Answer(String category) {
 		
 
 		//repeat this with different categories
