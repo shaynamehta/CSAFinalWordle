@@ -9,6 +9,7 @@ public class Driver {
 		BoardGUI b = new BoardGUI(data); //need to adjust to our project
 		
 		FileRead a = new FileRead();
+		FileRead bb = new FileRead("animals");
 		a.Tester();
 	}
 

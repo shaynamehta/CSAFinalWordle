@@ -17,6 +17,59 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FileRead {
+	
+	
+	//empty constructor
+	//to be used when user does not choose a specific category for the round
+	public FileRead() {
+		
+		
+	}
+
+	//constructor for picking answer from within specific category
+	//will have to give specific instructions on how users type in new category
+	private String[] answer = new String[5];
+	private String correct = "";
+	
+	public FileRead(String category) {
+		
+
+		//repeat this with different categories
+		if (category.equals("animals")){
+			File words = new File("AnimalWords");
+			
+			
+			try {
+				Scanner scan = new Scanner(words);
+				
+				for (int i = 0 ; i < Math.random()*10 + 1 ; i++) {
+					
+					scan.nextLine();
+					correct = scan.nextLine();
+				}
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			System.out.println(correct);
+		}
+			
+		
+		//insert rest of if statements above
+		
+		//now String answer is set with a word and need to convert it to an array
+		
+		for (int i = 0; i < 5 ; i++) {
+			
+			answer[i] = correct.substring(i, i+1);
+			System.out.println(answer[i]);
+		}
+	
+		
+	}
+	
 
 	public void Tester(){
 	
@@ -26,7 +79,7 @@ public class FileRead {
 	try {
 		Scanner scan = new Scanner(words);
 		
-		for (int i = 0 ; i < Math.random()*14 + 1 ; i++) {
+		for (int i = 0 ; i < Math.random()*10 + 1 ; i++) {
 			
 			scan.nextLine();
 			answer = scan.nextLine();
