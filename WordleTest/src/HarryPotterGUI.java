@@ -5,14 +5,16 @@ import java.util.Scanner;
 
 public class HarryPotterGUI extends BoardGUI {
 	
+	//setting up background audio
 	SimpleAudioPlayer bgTheme = new SimpleAudioPlayer("HPTheme.wav", true);
+	//background color
 	 Color background = new Color(800080); 
 	
 	public HarryPotterGUI() {
 		super(getPotterWord());
 		bgTheme.play();
 		applyTheme();
-        
+        //color
         colorCorrectSpot = new Color(35, 101, 51);  
         colorWrongSpot = new Color(218, 244, 40);    
         colorNotInWord = new Color(153, 153, 153);  
@@ -23,6 +25,7 @@ public class HarryPotterGUI extends BoardGUI {
 	
     private static String getPotterWord() {
     	String answer = "";
+	//extracting file text
     	File words = new File("Harry Potter");
 		
 		
@@ -42,18 +45,19 @@ public class HarryPotterGUI extends BoardGUI {
 		System.out.println(answer);
 		return answer;
 	}
-
+	//background + tile color
 	private void applyTheme() {
         Color darkGreen = new Color(2, 48, 32);
         Color darkYellow = new Color(255, 174, 66);
         Color darkGray = new Color(211, 211, 211);
-
+	
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[0].length; j++) {
                 tiles[i][j].setBackground(Color.red);
                 tiles[i][j].setForeground(Color.DARK_GRAY);
             }
         }
+	//setting background
         inputField.setBackground(Color.LIGHT_GRAY);
         inputField.setForeground(Color.DARK_GRAY);
         submitButton.setBackground(darkGreen);
