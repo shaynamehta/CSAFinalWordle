@@ -1,150 +1,186 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Arrays;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.Timer;
+public class BoardGUI extends JPanel implements KeyListener, ActionListener {
+    protected Tile[][] tiles;
+    private Board board;
+    private Color[] colors;
+    Timer t; // used for bot
+    protected JTextField inputField;
+    protected JButton submitButton;
+    
+    protected Color colorCorrectSpot;
+    protected Color colorWrongSpot;
+    protected Color colorNotInWord;
 
+    public BoardGUI() {
+        tiles = new Tile[6][5];
+        colors = new Color[20];
+        t = new Timer(1000, this);
+        // Colors initialized in setup()
+        setup(new String());
+        t.start(); // calls a method every second
+    }
 
-/*
- * started slightly adjusting this to work for wordle but orientation of
- * board is a little messed up rn
- */
-public class BoardGUI extends JPanel implements KeyListener, ActionListener{
-	private Tile[][] b;
-	private Board data;
-	private Color[] colors;
-	Timer t; //used for bot 
-	
-	public BoardGUI() {
-		b = new Tile[5][5];
-		colors = new Color[20];
-		t = new Timer(1000,this);
-		setup(new String[][]{});
-		t.start();	//calls a method every second
-	}	
-	
-	public BoardGUI(String[][] data2) {
-		b = new Tile[5][5];
-		colors = new Color[20];
-		t = new Timer(1000,this);
-		setup(data2);
-		t.start();	//calls a method every second
-	}		
-	
-	public void setup(String[][] data2) {
-		JFrame frame = new JFrame("2048");
-		frame.setSize(400, 450);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.addKeyListener(this);
-		
-		colors[0] = new Color(0xc7b9ab); //2
-		colors[1] = new Color(0xeaded5); //4
-		colors[2] = new Color(0xe9dbc0); //8
-		colors[3] = new Color(0xefa76b); //16
-		colors[4] = new Color(0xf59563); //32
-		colors[5] = new Color(0xf67c5f); //64
-		colors[6] = new Color(0xf65e3b); //128
-		colors[7]= new Color(0xedcf72);  //256
-		colors[8]= new Color(0xedcc61); //512
-		colors[9]= new Color(0xedcc61); //1024
-		colors[10]= new Color(0xf3c92f); //2048 
+    public BoardGUI(String answer) {
+        tiles = new Tile[6][5];
+        colors = new Color[20];
+        t = new Timer(1000, this);
+        // Colors initialized in setup()
+        setup(answer);
+        t.start(); // calls a method every second
+    }
 
-		for(int i =11; i < colors.length;i++){
-			colors[i] = new Color(0xf3c92f);
-		}
-		
-		Font bigFont = new Font("Serif", Font.BOLD, 55);
-		GridLayout g = new GridLayout(5,4);
-		frame.setLayout(g);
-		
-		for(int i =0; i < b.length;i++) {
-			for(int j = 0; j < b[0].length;j++) {
-				b[i][j] = new Tile();
-				b[i][j].setSize(100,100); //				Tile.setHorizontalAlignment(JTextField.CENTER);
-				b[i][j].setFont(bigFont);
-				b[i][j].setHorizontalAlignment(JTextField.CENTER);
-				b[i][j].setBackground(colors[b[i][j].cindex]);
-				frame.add(b[i][j]);
-			}
-		}
-		data = new Board();
-		//update();		 		
-		frame.setVisible(true);
+    public void setup(String answer) {
+        JFrame frame = new JFrame("SRL's Wordle");
+        frame.setSize(400, 450);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addKeyListener(this);
 
-	}
-	
-	public void update() { 
-		for(int r = 0; r < 4;r++) {
-			for(int c =0; c < 4; c++) {
-				b[r][c].setValue(data.getBoard()[r][c]);
-				b[r][c].setBackground(colors[b[r][c].cindex]);
-			}
-		}
-	}
-	
-	
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		/* call the helper methods for the Board object data*/
-		System.out.println(arg0.getKeyCode());
-		
-		/* you can add tester code to invoke helper methods */
-		String[] result = new String[5];
-		System.out.println(Arrays.toString(result));
-		
-		switch(arg0.getKeyCode()) {
-			
-		
-		}
-		
-//		update();
-		
-		
-		/** reset the game if all tiles are populated **/
-		if(data.gameOver()) {
-			data = new Board();
-			update();
-			 
-		}
-	}
+        // Initialize inputField and submitButton before use
+        inputField = new JTextField(5);
+        submitButton = new JButton("Submit");
 
+        // Set layout for this JPanel (BoardGUI)
+        this.setLayout(new BorderLayout());
 
+        // Create tiles panel
+        JPanel tilePanel = new JPanel(new GridLayout(6, 5));
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		// bot algorithm - decide the next move
-		
-		/*
-		data.left();
-		
-		//every move, call populate and update
-		data.populateOne();
-		update();
-		*/
-		
-	}
+        Font bigFont = new Font("Serif", Font.BOLD, 55);
 
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[0].length; j++) {
+                tiles[i][j] = new Tile();
+                tiles[i][j].setSize(100, 100);
+                tiles[i][j].setFont(bigFont);
+                tiles[i][j].setHorizontalAlignment(JTextField.CENTER);
+                tilePanel.add(tiles[i][j]);
+            }
+        }
 
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
+        // Add tiles panel to this JPanel center
+        this.add(tilePanel, BorderLayout.CENTER);
+
+        // Create input panel with inputField and submitButton
+        JPanel inputPanel = new JPanel();
+        inputField.setFont(new Font("Serif", Font.BOLD, 36));
+        inputPanel.add(inputField);
+        inputPanel.add(submitButton);
+
+        // Add input panel to this JPanel south
+        this.add(inputPanel, BorderLayout.SOUTH);
+
+        // Initialize colors here (only once)
+        colorCorrectSpot = new Color(106, 170, 100);  // green
+        colorWrongSpot = new Color(201, 180, 88);     // yellow
+        colorNotInWord = new Color(120, 124, 126);    // gray
+
+        // Add action listeners
+        submitButton.addActionListener(e -> submitGuess());
+
+        inputField.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    submitGuess();
+                }
+            }
+        });
+
+        // Initialize board
+        board = new Board(answer);
+
+        // Add this JPanel (BoardGUI) to frame
+        frame.add(this);
+
+        frame.setVisible(true);
+        inputField.requestFocus();
+    }
+
+    private void submitGuess() {
+        String guess = inputField.getText().toUpperCase().trim();
+        if (!board.isValidGuess(guess)) {
+            JOptionPane.showMessageDialog(this, "Guess must be exactly " + Board.cols + " letters.");
+            return;
+        }
+        if (board.gameOver()) {
+            JOptionPane.showMessageDialog(this, "Game over! The word was: " + board.getAnswer());
+            return;
+        }
+
+        int row = board.getCurrentRow();
+        board.setGuess(row, guess.toCharArray());
+
+        // Initially set all tiles to "not in word" color
+        for (int c = 0; c < Board.cols; c++) {
+            tiles[row][c].setLetter(guess.charAt(c));
+            tiles[row][c].setColor(colorNotInWord);
+        }
+
+        boolean[] answerUsed = new boolean[Board.cols];
+        String answer = board.getAnswer();
+
+        // First pass - correct spot (green)
+        for (int c = 0; c < Board.cols; c++) {
+            if (guess.charAt(c) == answer.charAt(c)) {
+                tiles[row][c].setColor(colorCorrectSpot);
+                answerUsed[c] = true;
+            }
+        }
+
+        // Second pass - wrong spot but in word (yellow)
+        for (int c = 0; c < Board.cols; c++) {
+            // Skip already green tiles
+            if (tiles[row][c].getBackground().equals(colorCorrectSpot)) continue;
+            char ch = guess.charAt(c);
+            boolean found = false;
+            for (int i = 0; i < Board.cols; i++) {
+                if (!answerUsed[i] && answer.charAt(i) == ch) {
+                    found = true;
+                    answerUsed[i] = true;
+                    break;
+                }
+            }
+            if (found) {
+                tiles[row][c].setColor(colorWrongSpot);
+            } else {
+                tiles[row][c].setColor(colorNotInWord);
+            }
+        }
+
+        if (board.checkWin(row)) {
+            JOptionPane.showMessageDialog(this, "Congratulations! You guessed the word!");
+            inputField.setEditable(false);
+            submitButton.setEnabled(false);
+        } else {
+            board.nextRow();
+            if (board.gameOver()) {
+                JOptionPane.showMessageDialog(this, "Game over! The word was: " + answer);
+                inputField.setEditable(false);
+                submitButton.setEnabled(false);
+            }
+        }
+
+        inputField.setText("");
+        inputField.requestFocus();
+    }
+
+    // Required by ActionListener interface, no current usage
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    }
+
+    // KeyListener methods (empty since you're using KeyAdapter)
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 }
