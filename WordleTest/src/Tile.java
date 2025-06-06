@@ -21,6 +21,17 @@ public class Tile extends JLabel {
         setBorder(border);
         setText("");
     }
+    
+    public Tile(Color background) { //this has a color constructor in order to change the backgorund color of the tiles 
+        defaultBg = background;
+    	setOpaque(true);
+        setFont(new Font("Dialog", Font.BOLD, 55));
+        setHorizontalAlignment(JLabel.CENTER);
+        setBackground(background);
+        MatteBorder border = new MatteBorder(3,3,3,3, background);
+        setBorder(border);
+        setText("");
+    }
 
     public void setLetter(char c) {
         letter = c;

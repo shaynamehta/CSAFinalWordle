@@ -5,18 +5,22 @@ import java.util.Scanner;
 
 public class HarryPotterGUI extends BoardGUI {
 	
-	SimpleAudioPlayer hpTheme = new SimpleAudioPlayer("HPTheme.wav", true);
+	SimpleAudioPlayer bgTheme = new SimpleAudioPlayer("HPTheme.wav", true);
+	 Color background = new Color(800080); 
 	
 	public HarryPotterGUI() {
-        super(getPotterWord());
-        hpTheme.play();
-		//SimpleAudioPlayer.playInBackground("success.wav");
-        applyTheme();
-        colorCorrectSpot = new Color(102, 204, 255);  // light blue
-        colorWrongSpot = new Color(153, 255, 204);    // mint
-        colorNotInWord = new Color(200, 200, 255);  
+		super(getPotterWord());
+		bgTheme.play();
+		applyTheme();
+        
+        colorCorrectSpot = new Color(35, 101, 51);  
+        colorWrongSpot = new Color(218, 244, 40);    
+        colorNotInWord = new Color(153, 153, 153);  
+        backgroundColor = new Color(800020);
     }
 
+	
+	
     private static String getPotterWord() {
     	String answer = "";
     	File words = new File("Harry Potter");
@@ -25,7 +29,7 @@ public class HarryPotterGUI extends BoardGUI {
 		try {
 			Scanner scan = new Scanner(words);
 			
-			for (int i = 0 ; i < Math.random()*10 + 1 ; i++) {
+			for (int i = 0 ; i < Math.random()*40 + 1 ; i++) {
 				
 				scan.nextLine();
 				answer = scan.nextLine();
@@ -35,7 +39,7 @@ public class HarryPotterGUI extends BoardGUI {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println(answer);
 		return answer;
 	}
 
@@ -46,11 +50,11 @@ public class HarryPotterGUI extends BoardGUI {
 
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[0].length; j++) {
-                tiles[i][j].setBackground(darkGray);
+                tiles[i][j].setBackground(Color.red);
                 tiles[i][j].setForeground(Color.DARK_GRAY);
             }
         }
-        inputField.setBackground(darkYellow);
+        inputField.setBackground(Color.LIGHT_GRAY);
         inputField.setForeground(Color.DARK_GRAY);
         submitButton.setBackground(darkGreen);
         submitButton.setForeground(Color.DARK_GRAY);

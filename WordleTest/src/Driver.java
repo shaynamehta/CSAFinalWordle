@@ -10,11 +10,13 @@ public class Driver {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		//SimpleAudioPlayer bg = new SimpleAudioPlayer("classic.wav", true);
 
 		SwingUtilities.invokeLater(() -> {
 			
 		    // Show a dialog to select theme
-		   String[] themes = { "Classic", "Animals", "Locations" , "Harry Potter"};
+		   String[] themes = { "Classic", "Animals", "Locations" , "Harry Potter", "Food and Drinks"};
 		   String selectedTheme = (String) JOptionPane.showInputDialog(
 		   null,
 		   "Choose your theme:",
@@ -49,6 +51,8 @@ public class Driver {
                case "Harry Potter":
             	   gamePanel = new HarryPotterGUI();
             	   break;
+               case "Food and Drinks":
+            	   gamePanel = new FoodGUI();
            }
 
            frame.add(gamePanel);
@@ -65,7 +69,7 @@ public class Driver {
 		try {
 			Scanner scan = new Scanner(words);
 			
-			for (int i = 0 ; i < Math.random()*200 + 1 ; i++) {
+			for (int i = 0 ; i < Math.random()*190 + 1 ; i++) {
 				
 				scan.nextLine();
 				answer = scan.nextLine();

@@ -7,32 +7,42 @@ public class BoardGUI extends JPanel implements KeyListener, ActionListener {
     private Board board;
     private Color[] colors;
     Timer t; // used for bot
+    //SimpleAudioPlayer bgTheme = new SimpleAudioPlayer("classic.wav", true);
     protected JTextField inputField;
     protected JButton submitButton;
     
     protected Color colorCorrectSpot;
     protected Color colorWrongSpot;
     protected Color colorNotInWord;
+    protected Color backgroundColor; 
+    
 
-    public BoardGUI() {
-        tiles = new Tile[6][5];
-        colors = new Color[20];
-        t = new Timer(1000, this);
-        // Colors initialized in setup()
-        setup(new String());
-        t.start(); // calls a method every second
-    }
+//    public BoardGUI(String string, Color color) {
+//        tiles = new Tile[6][5];
+//        colors = new Color[20];
+//        t = new Timer(1000, this);
+//        // Colors initialized in setup()
+//        setup(new String(), colors[2]);
+//        t.start(); // came from 2048 game don't know if we need this
+//    }
 
     public BoardGUI(String answer) {
-        tiles = new Tile[6][5];
+    	tiles = new Tile[6][5];
         colors = new Color[20];
         t = new Timer(1000, this);
+        //bgTheme.play();
         // Colors initialized in setup()
         setup(answer);
         t.start(); // calls a method every second
+        
     }
 
-    public void setup(String answer) {
+   
+
+
+
+
+	public void setup(String answer) {
         JFrame frame = new JFrame("SRL's Wordle");
         frame.setSize(400, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,6 +107,8 @@ public class BoardGUI extends JPanel implements KeyListener, ActionListener {
         frame.setVisible(true);
         inputField.requestFocus();
     }
+    
+   
 
     private void submitGuess() {
         String guess = inputField.getText().toUpperCase().trim();

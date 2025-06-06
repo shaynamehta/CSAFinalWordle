@@ -5,10 +5,17 @@ import java.util.Scanner;
 
 public class AnimalGUI extends BoardGUI {
 
+	SimpleAudioPlayer bgTheme = new SimpleAudioPlayer("animal.wav", true);
 	
 	public AnimalGUI() {
+		
 		super(getAnimalWord());;
         applyTheme();
+        bgTheme.play();
+        colorCorrectSpot = new Color(35, 101, 51);  
+        colorWrongSpot = new Color(218, 244, 40);    
+        colorNotInWord = new Color(153, 153, 153);   
+        backgroundColor = new Color(800080);
     }
 
     private static String getAnimalWord() {
@@ -20,7 +27,7 @@ public class AnimalGUI extends BoardGUI {
 		try {
 			Scanner scan = new Scanner(words);
 			
-			for (int i = 0 ; i < Math.random()*10 + 1 ; i++) {
+			for (int i = 0 ; i < Math.random()*15 + 1 ; i++) {
 				
 				scan.nextLine();
 				answer = scan.nextLine();
@@ -38,10 +45,11 @@ public class AnimalGUI extends BoardGUI {
         Color pastelGreen = new Color(152, 251, 152);
         Color pastelYellow = new Color(255, 250, 205);
         Color pastelGray = new Color(211, 211, 211);
+        Color orange = new Color(255, 165, 0);
 
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[0].length; j++) {
-                tiles[i][j].setBackground(pastelGray);
+                tiles[i][j].setBackground(Color.ORANGE);
                 tiles[i][j].setForeground(Color.DARK_GRAY);
             }
         }
