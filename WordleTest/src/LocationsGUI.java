@@ -4,13 +4,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class LocationsGUI extends BoardGUI {
-
+	//background audio
 	SimpleAudioPlayer bgTheme = new SimpleAudioPlayer("location.wav", true);
 	
 	public LocationsGUI() {
         super(getLocationsWord());
         bgTheme.play();
         applyTheme();
+	//colors for right, wrong, right but wrong, background color
         colorCorrectSpot = new Color(35, 101, 51);  
         colorWrongSpot = new Color(218, 244, 40);    
         colorNotInWord = new Color(153, 153, 153);  
@@ -40,7 +41,7 @@ public class LocationsGUI extends BoardGUI {
 	}
 
  
-
+	//colors
 	private void applyTheme() {
         Color darkGreen = new Color(2, 48, 32);
         Color darkYellow = new Color(255, 174, 66);
@@ -53,10 +54,12 @@ public class LocationsGUI extends BoardGUI {
                 tiles[i][j].setForeground(Color.DARK_GRAY);
             }
         }
+	//inputting everything
         inputField.setBackground(darkYellow);
         inputField.setForeground(Color.DARK_GRAY);
         submitButton.setBackground(darkGreen);
         submitButton.setForeground(Color.DARK_GRAY);
+	//background
         this.setBackground(new Color(255, 245, 238)); // seashell pastel
     }
 }
