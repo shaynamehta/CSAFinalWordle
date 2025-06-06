@@ -4,14 +4,15 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class AnimalGUI extends BoardGUI {
-
+	//setting up background audio
 	SimpleAudioPlayer bgTheme = new SimpleAudioPlayer("animal.wav", true);
 	
 	public AnimalGUI() {
-		
+		//extracting from file
 		super(getAnimalWord());;
         applyTheme();
         bgTheme.play();
+	//color
         colorCorrectSpot = new Color(35, 101, 51);  
         colorWrongSpot = new Color(218, 244, 40);    
         colorNotInWord = new Color(153, 153, 153);   
@@ -21,6 +22,7 @@ public class AnimalGUI extends BoardGUI {
     private static String getAnimalWord() {
 		// TODO Auto-generated method stub
     	String answer = "";
+	//file text
     	File words = new File("AnimalWords");
 		
 		
@@ -42,6 +44,7 @@ public class AnimalGUI extends BoardGUI {
 	}
 
 	private void applyTheme() {
+	//applying the colors
         Color pastelGreen = new Color(152, 251, 152);
         Color pastelYellow = new Color(255, 250, 205);
         Color pastelGray = new Color(211, 211, 211);
@@ -53,6 +56,7 @@ public class AnimalGUI extends BoardGUI {
                 tiles[i][j].setForeground(Color.DARK_GRAY);
             }
         }
+	//inputting everything
         inputField.setBackground(pastelYellow);
         inputField.setForeground(Color.DARK_GRAY);
         submitButton.setBackground(pastelGreen);
